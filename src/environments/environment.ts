@@ -4,5 +4,14 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  
+  firebase: {
+    apiKey: "AIzaSyDzUpXzXjYKtY9J8eImH2AWU0XR8rpo8cU",
+    authDomain: "gogo-mart.firebaseapp.com",
+    databaseURL: "https://gogo-mart.firebaseio.com",
+    projectId: "gogo-mart",
+    storageBucket: "gogo-mart.appspot.com",
+    messagingSenderId: "939138133442"
+  }
 };

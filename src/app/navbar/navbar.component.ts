@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +9,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent implements OnInit {
   @Input('isTransparent') isTransparent = false;
 
-  constructor() { }
+  get user () {
+    return this.authService.user;
+  }
+  
+  constructor(private authService: AuthService) { 
+  }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

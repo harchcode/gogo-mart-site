@@ -7,7 +7,7 @@
     </ul>
     <div class="dtc v-mid pa3 list">
       <a class="f6 fw4 dib pv2 pointer hover-white no-underline white-70">
-        Username
+        Hi, {{ user ? user.displayName : 'Guest' }}
       </a>
     </div>
     <ul class="dtc v-mid pa3 list tr">
@@ -21,28 +21,28 @@
           <i class="fa fa-shopping-cart"></i> Shopping Cart
         </a>
       </li>
-      <li class="f6 fw4 dib pv2 ph3 pointer">
+      <li *ngIf="user" class="f6 fw4 dib pv2 ph3 pointer">
         <a class="hover-white no-underline white-70" routerLink="/my/orders">
           <i class="fa fa-th-list"></i> My Orders
         </a>
       </li>    
-      <li class="f6 fw4 dib pv2 ph3 pointer">
+      <li *ngIf="user" class="f6 fw4 dib pv2 ph3 pointer">
         <a class="hover-white no-underline white-70" routerLink="/admin/orders">
           <i class="fa fa-money"></i> Manage Orders
         </a>
       </li>    
-      <li class="f6 fw4 dib pv2 ph3 pointer">
+      <li *ngIf="user" class="f6 fw4 dib pv2 ph3 pointer">
         <a class="hover-white no-underline white-70" routerLink="/admin/products">
           <i class="fa fa-briefcase"></i> Manage Products
         </a>
       </li>
-      <li class="f6 fw4 dib pv2 ph3 pointer">
+      <li *ngIf="!user" class="f6 fw4 dib pv2 ph3 pointer">
         <a class="hover-white no-underline white-70" routerLink="/login">
           <i class="fa fa-sign-in"></i> Log In
         </a>
       </li>    
-      <li class="f6 fw4 dib pv2 ph3 pointer">
-        <a class="hover-white no-underline white-70">
+      <li *ngIf="user" class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" (click)="logout()">
           <i class="fa fa-sign-out"></i> Log Out
         </a>
       </li>    
