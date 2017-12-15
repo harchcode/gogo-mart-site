@@ -1,49 +1,51 @@
-<nav class="dt w-100 mw8 center">
-  <ul class="dtc v-mid pa3 list">
-    <li class="dib w2 h2 pa1 grow-large">
-      <a routerLink="/"><img src="assets/logo.png"></a>
-    </li>
-  </ul>
-  <div class="dtc v-mid pa3 list">
-    <a class="f6 fw4 dib pv2 pointer hover-white no-underline white-70">
-      Username
-    </a>
+<nav class="w-100 absolute" [class.bg-black-80]="!isTransparent">
+  <div class="dt w-100 mw8 center">
+    <ul class="dtc v-mid pa3 list">
+      <li class="dib w2 h2 pa1 grow-large">
+        <a routerLink="/"><img src="assets/logo.png"></a>
+      </li>
+    </ul>
+    <div class="dtc v-mid pa3 list">
+      <a class="f6 fw4 dib pv2 pointer hover-white no-underline white-70">
+        Username
+      </a>
+    </div>
+    <ul class="dtc v-mid pa3 list tr">
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" routerLink="/products">
+          <i class="fa fa-shopping-bag"></i> Catalog
+        </a>
+      </li>
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" routerLink="/shopping-cart">
+          <i class="fa fa-shopping-cart"></i> Shopping Cart
+        </a>
+      </li>
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" routerLink="/my/orders">
+          <i class="fa fa-th-list"></i> My Orders
+        </a>
+      </li>    
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" routerLink="/admin/orders">
+          <i class="fa fa-money"></i> Manage Orders
+        </a>
+      </li>    
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" routerLink="/admin/products">
+          <i class="fa fa-briefcase"></i> Manage Products
+        </a>
+      </li>
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70" routerLink="/login">
+          <i class="fa fa-sign-in"></i> Log In
+        </a>
+      </li>    
+      <li class="f6 fw4 dib pv2 ph3 pointer">
+        <a class="hover-white no-underline white-70">
+          <i class="fa fa-sign-out"></i> Log Out
+        </a>
+      </li>    
+    </ul>
   </div>
-  <ul class="dtc v-mid pa3 list tr">
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70" routerLink="/products">
-        <i class="fa fa-shopping-bag"></i> Catalog
-      </a>
-    </li>
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70" routerLink="/shopping-cart">
-        <i class="fa fa-shopping-cart"></i> Shopping Cart
-      </a>
-    </li>
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70" routerLink="/my/orders">
-        <i class="fa fa-th-list"></i> My Orders
-      </a>
-    </li>    
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70" routerLink="/admin/orders">
-        <i class="fa fa-money"></i> Manage Orders
-      </a>
-    </li>    
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70" routerLink="/admin/products">
-        <i class="fa fa-briefcase"></i> Manage Products
-      </a>
-    </li>
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70" routerLink="/login">
-        <i class="fa fa-sign-in"></i> Log In
-      </a>
-    </li>    
-    <li class="f6 fw4 dib pv2 ph3 pointer">
-      <a class="hover-white no-underline white-70">
-        <i class="fa fa-sign-out"></i> Log Out
-      </a>
-    </li>    
-  </ul>
 </nav>

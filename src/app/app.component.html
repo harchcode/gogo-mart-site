@@ -1,5 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
-  <router-outlet></router-outlet>
+  <app-navbar [isTransparent]="isHomeRoute()"></app-navbar>
+
+  <div [class.pt5]="!isHomeRoute()">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
