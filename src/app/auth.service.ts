@@ -1,38 +1,33 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { OnDestroy } from '@angular/core';
 import * as firebase from 'firebase';
-import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { UserService } from './user.service';
+import { AppUser } from './models/app-user';
 
 @Injectable()
-export class AuthService implements OnDestroy {
-  user: firebase.User;
-  private subscription: Subscription;
+export class AuthService {
+  user$: Observable<firebase.User>;
 
   constructor(
     private af2Auth: AngularFireAuth,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {
-    this.subscription = af2Auth.authState.subscribe(user => {
-      this.user = user;
-
-      if (this.user) {
-        let justLoggedIn = localStorage.getItem('justLoggedIn');
-
-        if (justLoggedIn) {
-          localStorage.removeItem('justLoggedIn');
-
-          let returnUrl = localStorage.getItem('returnUrl');
-          router.navigateByUrl(returnUrl);
-        }
-      }
-    });
+    this.user$ = af2Auth.authState;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  get appUser$() : Observable<AppUser> {
+    return this.user$
+      .switchMap(user => {
+        if (user) {
+          return this.userService.get(user.uid).valueChanges();
+        } else {
+          return Observable.of(null);
+        }
+      });
   }
 
   login () {
@@ -45,6 +40,7 @@ export class AuthService implements OnDestroy {
 
   logout () {
     this.af2Auth.auth.signOut();
+    this.router.navigateByUrl('/');
   }
 
 }

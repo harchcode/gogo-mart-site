@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AuthService } from '../auth.service';
+import * as firebase from 'firebase';
+import { AppUser } from '../models/app-user';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +11,12 @@ import { AuthService } from '../auth.service';
 export class NavbarComponent implements OnInit {
   @Input('isTransparent') isTransparent = false;
 
-  get user () {
-    return this.auth.user;
-  }
+  user: AppUser;
   
   constructor(private auth: AuthService) { 
+    auth.appUser$.subscribe(user => {
+      this.user = user;
+    })
   }
 
   ngOnInit() {
