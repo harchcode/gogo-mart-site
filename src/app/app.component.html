@@ -1,8 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
-  <app-navbar [isTransparent]="isHomeRoute()"></app-navbar>
+  <app-navbar *ngIf="!isHomeRoute()"></app-navbar>
 
-  <div [class.pt5]="!isHomeRoute()">
+  <div>
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -10,17 +10,17 @@ export class NavbarComponent implements OnInit {
   @Input('isTransparent') isTransparent = false;
 
   get user () {
-    return this.authService.user;
+    return this.auth.user;
   }
   
-  constructor(private authService: AuthService) { 
+  constructor(private auth: AuthService) { 
   }
 
   ngOnInit() {
   }
 
   logout() {
-    this.authService.logout();
+    this.auth.logout();
   }
 
 }
