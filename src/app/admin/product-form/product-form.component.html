@@ -68,6 +68,12 @@
       </p>
       <p>
         <button class="ph3 pv2 pointer">Save</button>
+        <button 
+          (click)="delete()"
+          type="button" *ngIf="product"
+          class="ph3 pv2 pointer bg-red white-80">
+          Delete
+        </button>
       </p>
     </form>
   </div>

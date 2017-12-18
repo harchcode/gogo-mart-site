@@ -1,8 +1,41 @@
 <div class="center w-100 mw8 ph2 pv4">
-  <a
-    type="button"
-    routerLink="/admin/products/new"
-    class="ph3 pv2 pointer no-underline black-80">Add Product</a>
+  <p>
+    <a
+      type="button"
+      routerLink="/admin/products/new"
+      class="ph3 pv2 pointer no-underline black-80">Add Product</a>
+  </p>
+
+  <p>
+    <input #query
+      (keyup)="filter(query.value)"
+      type="text"
+      class="w-100 pa2"
+      placeholder="Search">
+  </p>
+
+  <!-- <ngx-datatable class="material"
+    [rows]="products"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50">
+    <ngx-datatable-column name="Title">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Gender">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | titlecase }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Price">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        IDR {{ value | number:'1.2-2' }}
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable> -->
 
   <table class="f6 w-100" cellspacing="0">
     <thead>
@@ -14,9 +47,9 @@
       </tr>
     </thead>
     <tbody class="lh-copy">
-      <tr class="stripe-dark" *ngFor="let p of products$ | async">
+      <tr class="stripe-dark" *ngFor="let p of filteredProducts">
         <td class="pa3">{{ p.title }}</td>
-        <td class="pa3">{{ p.gender }}</td>
+        <td class="pa3">{{ p.gender | titlecase }}</td>
         <td class="pa3 tr">{{ p.price | number:'1.2-2' }}</td>
         <td class="pa3">
           <a [routerLink]="['/admin/products/', p.id]">Edit</a>

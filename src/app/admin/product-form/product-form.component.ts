@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../category.service';
 import { Observable } from 'rxjs/Observable';
@@ -6,6 +6,8 @@ import { Category } from '../../models/category';
 import { ProductService } from '../../product.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
+import { Product } from '../../models/product';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-product-form',
@@ -15,15 +17,31 @@ import { CustomValidators } from 'ng2-validation';
 export class ProductFormComponent implements OnInit {
   categories$: Observable<Category[]>;
   productForm: FormGroup;
+  product: Product;
 
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { 
     this.categories$ = categoryService.getCategories();
     this.createForm();
+
+    let id = route.snapshot.paramMap.get('id');
+    if (id) {
+      this.productService.get(id).take(1).subscribe(p => {
+        this.product = p;
+        this.productForm.setValue({
+          title: p.title,
+          price: p.price,
+          category: p.category,
+          imageUrl: p.imageUrl,
+          gender: p.gender
+        });
+      });
+    }
   }
 
   get title() { return this.productForm.get('title'); }
@@ -50,8 +68,17 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(product) {
-    this.productService.create(product);
+    if (this.product) { this.productService.update(this.product.id, product); }
+    else { this.productService.create(product) }
+
     this.router.navigate(['/admin/products']);
+  }
+
+  delete() {
+    if (this.product && confirm('Are you sure you want to delete this product?')) {
+      this.productService.delete(this.product.id);
+      this.router.navigate(['/admin/products']);
+    }
   }
 
 }
