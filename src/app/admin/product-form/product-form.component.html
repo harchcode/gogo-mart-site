@@ -1,21 +1,91 @@
-<form class="pa4 black-80 w-100 mw8 center">
-  <p>
-    <label for="title" class="f6 b db mb2">Title <span class="normal black-60">(optional)</span></label>
-    <input id="title" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="title-desc">
-    <small id="title-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-  </p>
-  <p>
-    <label for="price" class="f6 b db mb2">Price</label>
-    <input id="price" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number">
-  </p>
-  <p>
-    <label for="category" class="f6 b db mb2">Category</label>
-    <select id="price" class="input-reset ba b--black-20 pa2 mb2 db w-100">
-      <option value=""></option>
-    </select>
-  </p>
-  <p>
-    <label for="image-url" class="f6 b db mb2">Image Url</label>
-    <input id="image-url" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
-  </p>
-</form>
+<div class="pa4 w-100 mw8 center"> 
+  <div class="fl w-50 pa2">
+    <form novalidate
+      [formGroup]="productForm" (ngSubmit)="save(productForm.value)"
+      class="black-80">
+      <p>
+        <label for="title" class="f6 b db mb2">Title <span class="normal black-60">(optional)</span></label>
+        <input 
+          id="title" name="title" formControlName="title"
+          class="input-reset ba b--black-20 pa2 mb2 db w-100" 
+          type="text" aria-describedby="title-desc">
+        <small 
+          id="title-desc" *ngIf="shouldShowError(title)"
+          class="f6 black-60 db mb2 red">Title is required.</small>
+      </p>
+      <p>
+        <label for="price" class="f6 b db mb2">Price</label>
+        <input 
+          id="price" name="price" formControlName="price"
+          class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number"
+          aria-describedby="price-desc">
+        <small 
+          id="price-desc" *ngIf="shouldShowError(price)"
+          class="f6 black-60 db mb2 red">
+          <div *ngIf="price.errors.required">Price is required.</div>
+          <div *ngIf="price.errors.min">Price should be 0 or higher.</div>
+        </small>
+      </p>
+      <p>
+        <label for="category" class="f6 b db mb2">Category</label>
+        <select 
+          id="category" name="category" formControlName="category"
+          class="input-reset ba b--black-20 pa2 mb2 db w-100"
+          aria-describedby="category-desc">
+          <option value=""></option>
+          <option *ngFor="let c of categories$ | async" [value]="c.key">
+            {{ c.name }}
+          </option>
+        </select>
+        <small 
+          id="category-desc" *ngIf="shouldShowError(category)"
+          class="f6 black-60 db mb2 red">Category is required.</small>
+      </p>
+      <p>
+        <label for="image-url" class="f6 b db mb2">Image Url</label>
+        <input 
+          id="image-url" name="imageUrl" formControlName="imageUrl"
+          class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text"
+          aria-describedby="image-url-desc">
+        <small 
+          id="image-url-desc" *ngIf="shouldShowError(imageUrl)"
+          class="f6 black-60 db mb2 red">
+          <div *ngIf="imageUrl.errors.required">Image URL is required.</div>
+          <div *ngIf="imageUrl.errors.url">Please insert a URL.</div>
+        </small>
+      </p>
+      <p>
+        <label class="f6 b db mb2">Gender</label>
+        <label class="mh2" *ngFor="let o of ['any', 'male', 'female']">
+          <input 
+            type="radio" formControlName="gender"
+            name="gender" [value]="o"
+            aria-describedby="gender-desc"> {{ o | titlecase }}
+        </label>
+        <small 
+          id="gender-desc" *ngIf="shouldShowError(gender)"
+          class="f6 black-60 db mb2 red">Gender is required.</small>
+      </p>
+      <p>
+        <button class="ph3 pv2 pointer">Save</button>
+      </p>
+    </form>
+  </div>
+
+  <div class="fl w-50 pa2">
+    <div class="br2 ba dark-gray b--black-10 mv4 w-100 mw5 center">
+      <img [src]="imageUrl.value" class="db w-100 br2 br--top">
+      <div class="pa2 ph3-ns pb3-ns">
+        <div class="w-100 mt1 tc">
+          <h1 class="f5 f4-ns mv0">{{ title.value }}</h1>
+          <h3 class="f5 mt3 mb0">IDR {{ price.value | number:'1.2-2' }}</h3>
+          <h5 class="f5 fw4 mt1 mb0">Gender: {{ gender.value | titlecase }}</h5>
+        </div>
+        <!-- <p class="f6 lh-copy measure mt2 mid-gray">
+          If it fits, i sits burrow under covers. Destroy couch leave hair everywhere,
+          and touch water with paw then recoil in horror.
+        </p> -->
+      </div>
+    </div>
+  </div>
+</div>
