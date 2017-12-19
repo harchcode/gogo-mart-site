@@ -1,0 +1,48 @@
+<div class="br2 ba dark-gray b--black-10 mv4 w-100 mw5 center">
+  <img [src]="product.imageUrl" class="db w-100 br2 br--top" [alt]="product.title">
+  <div class="pa2 ph3-ns pb3-ns">
+    <div class="w-100 mt1 tc">
+      <h1 class="f5 f4-ns mv0 db h3">{{ product.title }}</h1>
+      <h3 class="f5 mt3 mb0">IDR {{ product.price | number:'1.2-2' }}</h3>
+      <h5 class="f5 fw4 mt1 mb0">Gender: {{ product.gender | titlecase }}</h5>
+    </div>
+  </div>
+
+  <div class="cf ma0">
+    <div class="fl w-100">
+      <button type="button" *ngIf="getQuantity() == 0; else updateQuantity"
+        class="bg-black-90 pa2 ma0 w-100 white-80"
+        (click)="addToCart()">
+        Add to cart
+      </button>
+    </div>
+
+    <ng-template #updateQuantity>
+      <div class="fl w-20">
+        <button type="button" 
+          (click)="removeFromCart()"
+          class="bg-black-90 pa2 w-100 ma0 white-80 code"> - </button>
+      </div>
+      <div class="fl w-60 tc pt2 f4">{{ getQuantity() }} in cart</div>
+      <div class="fl w-20">
+        <button type="button" 
+          (click)="addToCart()"
+          class="bg-black-90 pa2 w-100 ma0 white-80 code"> + </button>
+      </div>
+
+      <!-- <div class="cf bt b--black-10 ma0">
+        <div class="fl w-20">
+          <button type="button" 
+            (click)="removeFromCart()"
+            class="bg-black-90 pa2 w-100 ma0 white-80 code"> - </button>
+        </div>
+        <div class="fl w-60 tc pt2 f4">{{ getQuantity() }} in cart</div>
+        <div class="fl w-20">
+          <button type="button" 
+            (click)="addToCart()"
+            class="bg-black-90 pa2 w-100 ma0 white-80 code"> + </button>
+        </div>
+      </div> -->
+    </ng-template>
+  </div>
+</div>

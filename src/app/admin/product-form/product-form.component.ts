@@ -4,7 +4,7 @@ import { CategoryService } from '../../category.service';
 import { Observable } from 'rxjs/Observable';
 import { Category } from '../../models/category';
 import { ProductService } from '../../product.service';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import { Product } from '../../models/product';
 import 'rxjs/add/operator/take';
@@ -63,7 +63,7 @@ export class ProductFormComponent implements OnInit {
     })
   }
 
-  shouldShowError(control: FormControl) {
+  shouldShowError(control: AbstractControl) {
     return control.invalid && (control.dirty || control.touched);
   }
 

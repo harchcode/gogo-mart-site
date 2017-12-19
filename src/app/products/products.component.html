@@ -5,17 +5,7 @@
 
   <div class="fl w-80 pa2">
     <div class="dib w-third pa1" *ngFor="let p of filteredProducts">
-      <div class="br2 ba dark-gray b--black-10 mv4 w-100 mw5 center">
-        <img [src]="p.imageUrl" class="db w-100 br2 br--top">
-        <div class="pa2 ph3-ns pb3-ns">
-          <div class="w-100 mt1 tc">
-            <h1 class="f5 f4-ns mv0 db h3">{{ p.title }}</h1>
-            <h3 class="f5 mt3 mb0">IDR {{ p.price | number:'1.2-2' }}</h3>
-            <h5 class="f5 fw4 mt1 mb0">Gender: {{ p.gender | titlecase }}</h5>
-          </div>
-        </div>
-        <button type="button" class="bg-black-90 pa2 ma0 w-100 white-80">Add to cart</button>
-      </div>
+      <product-card [product]="p" [shopping-cart]="cart"></product-card>
     </div>
   </div>
 </div>
