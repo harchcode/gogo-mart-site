@@ -1,0 +1,21 @@
+<div>
+  <h1 class="f4 bold center mw5">Categories</h1>
+  <div class="pl0 ml0 center mw5 ba b--black-10 br3">
+    <a routerLink="/products"
+      class="db ph3 pv3 f4 bb b--black-10 hover-black no-underline black-70 pointer"
+      [class.b]="!category"
+      [class.black]="!category">
+      All
+    </a>
+    <a routerLink="/products"
+      *ngFor="let c of categories$ | async; last as isLast"
+      [queryParams]="{ category: c.key }"
+      class="db ph3 pv3 f4 hover-black no-underline black-70 pointer"
+      [class.bb]="!isLast"
+      [class.b--black-10]="!isLast"
+      [class.b]="c.key == category"
+      [class.black]="c.key == category">
+      {{ c.name }}
+    </a>
+  </div>
+</div>

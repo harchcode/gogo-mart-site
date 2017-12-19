@@ -19,12 +19,9 @@ export class AppComponent {
       if (user) {
         userService.save(user);
 
-        let justLoggedIn = localStorage.getItem('justLoggedIn');
-
-        if (justLoggedIn) {
-          localStorage.removeItem('justLoggedIn');
-
-          let returnUrl = localStorage.getItem('returnUrl');
+        let returnUrl = localStorage.getItem('returnUrl');
+        if (returnUrl) {
+          localStorage.removeItem('returnUrl');
           router.navigateByUrl(returnUrl);
         }
       }
