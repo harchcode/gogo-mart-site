@@ -18,7 +18,11 @@
       </li>
       <li class="f6 fw4 dib pv2 ph3 pointer">
         <a class="hover-white no-underline white-70" routerLink="/shopping-cart">
-          <i class="fa fa-shopping-cart"></i> Shopping Cart
+          <i class="fa fa-shopping-cart"></i> Shopping Cart 
+          <span class="f6 ph2 br3 b bg-yellow black"
+            *ngIf="cart$ | async as cart">
+            {{ cart.totalItemsCount }}
+          </span>
         </a>
       </li>
       <li *ngIf="user" class="f6 fw4 dib pv2 ph3 pointer">

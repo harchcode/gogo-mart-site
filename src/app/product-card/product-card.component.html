@@ -8,41 +8,19 @@
     </div>
   </div>
 
-  <div class="cf ma0">
-    <div class="fl w-100">
-      <button type="button" *ngIf="getQuantity() == 0; else updateQuantity"
-        class="bg-black-90 pa2 ma0 w-100 white-80"
-        (click)="addToCart()">
-        Add to cart
-      </button>
+  <div *ngIf="shoppingCart">
+    <div class="cf ma0" *ngIf="shoppingCart.getQuantity(product) == 0; else updateQuantity">
+      <div class="fl w-100">
+        <button type="button"
+          class="bg-black-90 pa2 ma0 w-100 white-80"
+          (click)="addToCart()">
+          Add to cart
+        </button>
+      </div>
     </div>
 
     <ng-template #updateQuantity>
-      <div class="fl w-20">
-        <button type="button" 
-          (click)="removeFromCart()"
-          class="bg-black-90 pa2 w-100 ma0 white-80 code"> - </button>
-      </div>
-      <div class="fl w-60 tc pt2 f4">{{ getQuantity() }} in cart</div>
-      <div class="fl w-20">
-        <button type="button" 
-          (click)="addToCart()"
-          class="bg-black-90 pa2 w-100 ma0 white-80 code"> + </button>
-      </div>
-
-      <!-- <div class="cf bt b--black-10 ma0">
-        <div class="fl w-20">
-          <button type="button" 
-            (click)="removeFromCart()"
-            class="bg-black-90 pa2 w-100 ma0 white-80 code"> - </button>
-        </div>
-        <div class="fl w-60 tc pt2 f4">{{ getQuantity() }} in cart</div>
-        <div class="fl w-20">
-          <button type="button" 
-            (click)="addToCart()"
-            class="bg-black-90 pa2 w-100 ma0 white-80 code"> + </button>
-        </div>
-      </div> -->
+      <product-quantity [product]="product" [shopping-cart]="shoppingCart"></product-quantity>
     </ng-template>
   </div>
 </div>
