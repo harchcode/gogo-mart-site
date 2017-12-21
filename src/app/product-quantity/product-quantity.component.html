@@ -4,10 +4,17 @@
       (click)="removeFromCart()"
       class="bg-black-90 pa2 w-100 ma0 white-80 code"> - </button>
   </div>
-  <div class="fl w-60 tc pt2 f4">{{ shoppingCart.getQuantity(product) }} in cart</div>
+  <div class="fl w-60 tc pt2" *ngIf="forCart; else notCart">
+    {{ shoppingCart.getQuantity(product) }} in cart
+  </div>
+  <ng-template #notCart>
+    <div class="fl w-60 tc pt2 f4">
+      {{ shoppingCart.getQuantity(product) }} in cart
+    </div>
+  </ng-template>
   <div class="fl w-20">
     <button type="button" 
-      (click)="addToCart()"
+      (click)="clearCart()"
       class="bg-black-90 pa2 w-100 ma0 white-80 code"> + </button>
   </div>
 </div>

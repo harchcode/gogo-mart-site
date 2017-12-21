@@ -7,11 +7,11 @@ export class ShoppingCart {
   constructor(
     public itemsMap: { [productId: string]: ShoppingCartItem }
   ){
+    this.itemsMap = this.itemsMap || { };
+
     for (let productId in this.itemsMap) {
       let item = itemsMap[productId];
-      let cartItem = new ShoppingCartItem(item.product, item.quantity);
-
-      this.items.push(cartItem);
+      this.items.push(new ShoppingCartItem({...item, id: productId}));
     }
   }
 
@@ -30,6 +30,8 @@ export class ShoppingCart {
   }
 
   getQuantity(product: Product) {
+    if (!product) { return 0; }
+
     let item = this.itemsMap[product.id];
     return item ? item.quantity : 0;
   }

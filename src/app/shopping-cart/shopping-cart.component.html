@@ -12,11 +12,12 @@
     </thead>
     <tbody class="lh-copy code">
       <tr class="stripe-dark" *ngFor="let item of cart.items">
-        <td class="pa3">{{ item.product.title }}</td>
+        <td class="pa3">{{ item.title }}</td>
         <td class="pa3 tr">
           <product-quantity 
-            [product]="item.product" 
-            [shopping-cart]="cart"></product-quantity>
+            [product]="item" 
+            [shopping-cart]="cart"
+            [for-cart]="true"></product-quantity>
         </td>
         <td class="pa3 tr">
           {{ item.totalPrice | number:'1.2-2' }}
@@ -30,4 +31,11 @@
       </tr>
     </tfoot>
   </table>
+
+  <p>
+    <button
+      (click)="login()"
+      class="ph3 pv2 pointer bg-dark-red white-80"
+      type="button">Clear Shopping Cart</button>
+  </p>
 </div>

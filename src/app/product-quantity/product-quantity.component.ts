@@ -11,6 +11,7 @@ import { ShoppingCartService } from '../shopping-cart.service';
 export class ProductQuantityComponent {
   @Input('product') product: Product;
   @Input('shopping-cart') shoppingCart: ShoppingCart;
+  @Input('for-cart') forCart = false;
 
   constructor(
     private cartService: ShoppingCartService

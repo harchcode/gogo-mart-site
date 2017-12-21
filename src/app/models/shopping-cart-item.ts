@@ -1,12 +1,18 @@
 import { Product } from "./product";
 
 export class ShoppingCartItem {
-  constructor(
-    public product: Product,
-    public quantity: number
-  ) {}
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  gender: string;
+  quantity: number;
+
+  constructor(init?: Partial<ShoppingCartItem>) {
+    Object.assign(this, init);
+  }
 
   get totalPrice() {
-    return this.product.price * this.quantity;
+    return this.price * this.quantity;
   }
 }

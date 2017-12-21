@@ -5,7 +5,7 @@
 
   <div class="fl w-80 pa2">
     <div class="dib w-third pa1" *ngFor="let p of filteredProducts">
-      <product-card [product]="p" [shopping-cart]="cart"></product-card>
+      <product-card [product]="p" [shopping-cart]="cart$ | async"></product-card>
     </div>
   </div>
 </div>
