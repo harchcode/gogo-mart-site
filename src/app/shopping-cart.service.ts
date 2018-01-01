@@ -60,13 +60,18 @@ export class ShoppingCartService {
     let item$ = this.getItem(cartId, product.id);
 
     item$.snapshotChanges().take(1).subscribe(item => {
-      item$.update({ 
-        title: product.title,
-        price: product.price,
-        imageUrl: product.imageUrl,
-        gender: product.gender, 
-        quantity: (item.payload.exists() ? item.payload.val().quantity : 0) + change
-      });
+      let quantity = (item.payload.exists() ? item.payload.val().quantity : 0) + change;
+      
+      if (quantity <= 0) { item$.remove(); }
+      else {
+        item$.update({ 
+          title: product.title,
+          price: product.price,
+          imageUrl: product.imageUrl,
+          gender: product.gender, 
+          quantity: quantity
+        });
+      }
     });
   }
 

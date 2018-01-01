@@ -1,4 +1,3 @@
-import { ShoppingCartService } from './../shopping-cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ShoppingCart } from '../models/shopping-cart';
@@ -23,7 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   clearCart() {
-    this.ShoppingCartService.clearCart();
+    this.cartService.clearCart();
   }
 
 }
